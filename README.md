@@ -1,7 +1,7 @@
-# 🏆 Kaggle - Playground Series: Diabetes Prediction (Top 29%)
+# 🏆 Kaggle - Playground Series: Diabetes Prediction
 
 <!-- ここにバッジ（技術タグ）を入れるとエンジニアっぽくてカッコいい！ -->
-![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Python](https://img.shields.io/badge/Python-3.12.12-blue)
 ![LightGBM](https://img.shields.io/badge/Model-LightGBM-orange)
 
 ## 📌 1. Project Overview (プロジェクト概要)
