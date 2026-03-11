@@ -5,8 +5,8 @@
 ![LightGBM](https://img.shields.io/badge/Model-LightGBM-orange)
 
 ## 📌 1. Project Overview (プロジェクト概要)
-本リポジトリは、Kaggle「Diabetes Prediction Challenge (Playground Series)」における解法コードです。
-患者の健康データから糖尿病の発症有無を予測する二値分類タスクにおいて、EDA（探索的データ解析）に基づく特徴量エンジニアリングとLightGBMのチューニングを行い、最終的に上位29%の成績を収めました。
+本リポジトリは、Kaggle「Diabetes Prediction Challenge (Playground Series s5-e12)」における解法コードです。最終的にrivate leaderboardで4208人中1236位(上位約29.4%)の成績を収めました。
+患者の健康データから糖尿病の発症有無を予測する二値分類タスク（評価指標：ROC-AUC）において、EDA（探索的データ解析）に基づく特徴量エンジニアリングとLightGBMのチューニングを実施しました。開発プロセスでは、AIを単なるコード生成ツールとしてではなく「協働のパートナー」として活用しています。自らの仮説に基づいてEDAのグラフ描画を指示し、対話を通じて新規特徴量を考案するなど、主体的に分析を主導しました。
 
 ## 📂 2. Repository Structure (ファイル構成)
 スコア改善のプロセスが順を追って分かるよう、以下の3つのノートブックで構成しています。
