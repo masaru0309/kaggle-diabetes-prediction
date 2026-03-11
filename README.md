@@ -12,16 +12,16 @@
 ## 2. Repository Structure (ファイル構成)
 スコア改善のプロセスが順を追って分かるよう、以下の3つのノートブックで構成しています。
 
-* [01_baseline.ipynb]()
+* [01_baseline.ipynb](./01_baseline.ipynb)
 Private Score:0.63605
   * データの基本情報確認（欠損値・異常値・データ型のチェック）と、ロジスティック回帰による初期ベースライン作成。
-* [02_feature_engineering.ipynb]
+* [02_feature_engineering.ipynb](./02_feature_engineering.ipynb)
 Private Score:0.69438
   * 各特徴量における目的変数（糖尿病の有無）の分布を可視化し、新規特徴量（例：BMIと血圧の掛け合わせ等）を追加して精度向上を検証。モデルはLightGBMを使用。
-* [03_final_model_tuning.ipynb]
+* [03_final_model_tuning.ipynb](./03_model_tuning.ipynb)
 Private Score:0.69511
   * 最も効いた特徴量セットに対し、ハイパーパラメータ調整（モデルチューニング）を行い、予測を出力。これを最終提出モデルとした。
-* [04_failed_hyperparameter_tuning.ipynb]
+* [04_failed_hyperparameter_tuning.ipynb](./04_failed_hyperparameter_tuning.ipynb)
 Private Score:0.69478
   * さらなる精度向上を狙い EARLY_STOPPING = 200 等の過度なパラメータ調整を試みた実験記録。過学習となり、Private Scoreが`03_final_model_tuning.ipynb`を下回った。
 
@@ -43,7 +43,7 @@ Private Score:0.69478
 
 ## 4. Learnings & Future Work
 * 「公式」に囚われない特徴量エンジニアリングの重要性  
-  * 02_feature_engineering.ipynbにてEDAの段階で、systolic_bp や bmi, cholesterol_total 等のヒストグラムを確認した際、「横軸の値が増加する（説明変数の数値が高くなる）につれて、非糖尿病患者数（0）と糖尿病患者数（1）の差が激しくなっていく」という明確な傾向を視覚的に捉えていました。しかし、実際に作成した特徴量は、それらのうち systolic_bp 等のみを使用し、「脈圧」や「平均血圧」といった既存の医学的公式が存在するものを作ることに留まってしまいました。同様に乖離が激しかった bmi や cholesterol_total に関しては、当てはまる公式が思いつかなかったため特徴量作成には使用しませんでした。  
+  * [02_feature_engineering.ipynb](./02_feature_engineering.ipynb)にてEDAの段階で、systolic_bp や bmi, cholesterol_total 等のヒストグラムを確認した際、「横軸の値が増加する（説明変数の数値が高くなる）につれて、非糖尿病患者数（0）と糖尿病患者数（1）の差が激しくなっていく」という明確な傾向を視覚的に捉えていました。しかし、実際に作成した特徴量は、それらのうち systolic_bp 等のみを使用し、「脈圧」や「平均血圧」といった既存の医学的公式が存在するものを作ることに留まってしまいました。同様に乖離が激しかった bmi や cholesterol_total に関しては、当てはまる公式が思いつかなかったため特徴量作成には使用しませんでした。  
 コンペ終了後に上位解法を学び、例えば 「総コレステロール値（cholesterol_total）をHDLコレステロール値（hdl_cholesterol）で割った比率」といった、単純な四則演算から生まれる「医学的な名前が付けられない特徴量」であっても、機械学習の予測精度には大きく寄与することを知りました。  
 自分の発想が「意味のある名前がつくものしか特徴量にしてはいけない」という既存の勝手な枠に囚われていたことに気づき、今後は単純なも柔軟に取り入れたいと考えています。
 
