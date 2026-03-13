@@ -21,15 +21,12 @@ Private Score:0.69438
 * [03_final_model_tuning.ipynb](./03_model_tuning.ipynb)  
 Private Score:0.69511
   * 最も効いた特徴量セットに対し、ハイパーパラメータ調整（モデルチューニング）を行い、予測を出力。これを最終提出モデルとした。
-* [04_failed_hyperparameter_tuning.ipynb](./04_failed_hyperparameter_tuning.ipynb)  
-Private Score:0.69478
-  * さらなる精度向上を狙い EARLY_STOPPING = 200 等の過度なパラメータ調整を試みた実験記録。過学習となり、Private Scoreが`03_final_model_tuning.ipynb`を下回った。
 
 ## 3. Solution Approach (解法アプローチ)
 
 ### Feature Engineering (特徴量エンジニアリング)
 本プロジェクトでは、各特徴量における目的変数の分布変化を観察し、医学知識に落とし込むアプローチを重視しました。
-* ノイズの除去
+* 無関係な特徴量の除去
   * 予測に寄与しない、あるいは悪影響を与える可能性のあるID列を初期段階で除外。
 * 血圧データからの新規特徴量抽出（脈圧・平均血圧）
   * 既存の特徴量 systolic_bp（収縮期血圧）の分布グラフを分析した結果、血圧が上昇するにつれて非糖尿病（0）の割合が減少し、糖尿病（1）との乖離が顕著に拡大する傾向を発見しました。  
@@ -42,8 +39,6 @@ Private Score:0.69478
 * 特徴量エンジニアリングで構築したデータセットに対し、LightGBMのハイパーパラメータ調整を実施。特に、learning_rate(0.02) や num_leaves(64) などを調整して学習精度を向上しつつ、過学習を防ぐために min_data_in_leaf(50) などのパラメータを調整し、バランスを慎重に探りました。
 
 ## 4. Learnings & Future Work
-* [04_failed_hyperparameter_tuning.ipynb](./04_failed_hyperparameter_tuning.ipynb)で過学習が起きた原因について
-  * 当該NotebookではさらなるPublic LBスコアの向上を試みました。具体的には CV で n_splits=10
 
 * 「公式」に囚われない特徴量エンジニアリングの重要性  
   * [02_feature_engineering.ipynb](./02_feature_engineering.ipynb)にてEDAの段階で、systolic_bp や bmi, cholesterol_total 等のヒストグラムを確認した際、「横軸の値が増加する（説明変数の数値が高くなる）につれて、非糖尿病患者数（0）と糖尿病患者数（1）の差が激しくなっていく」という明確な傾向を視覚的に捉えていました。しかし、実際に作成した特徴量は、それらのうち systolic_bp 等のみを使用し、「脈圧」や「平均血圧」といった医学的根拠に基づく既存の公式が存在するものを作ることに留まってしまいました。同様に乖離が激しかった bmi や cholesterol_total に関しては、当てはまる公式が思いつかなかったため特徴量作成には使用しませんでした。  
